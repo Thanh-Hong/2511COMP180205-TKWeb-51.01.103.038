@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🧩 Ghép hình Doraemon</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">      
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <style>
+    :root{
+      --piece-size:80px;   /* Kích thước mảnh: thay đổi nếu muốn */
+      --cols:4;
+      --rows:3;
+    }
+
+    /* Responsive (nếu muốn có kích thước khác trên màn nhỏ) */
+    @media (max-width: 768px){ :root{ --piece-size:64px; } }
+    @media (max-width: 420px){ :root{ --piece-size:56px; } }
+
+    body{
+      background: linear-gradient(135deg,#fff7db 0%, #dff7ff 50%, #fff0f7 100%);
+      margin:0;
+      /* font-family:"Comic Sans MS", Arial, sans-serif; */
+    }
+
+    .app-wrap{
+      max-width:1100px;
+      margin:20px auto;
+      padding:12px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      font-family:"Comic Sans MS", Arial, sans-serif;
+      height: 100vh;
+    }
+
+    h1 { color:#0077cc; font-size:22px; margin-bottom:12px; }
+
+    .top-area {
+      display:flex;
+      gap:20px;
+      align-items:flex-start;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    /* --- Khung ghép (grid) --- */
+    .puzzle-board {
+      width: calc(var(--cols) * var(--piece-size));
+      height: calc(var(--rows) * var(--piece-size));
+      display:grid;
+      grid-template-columns: repeat(var(--cols), var(--piece-size));
+      grid-template-rows: repeat(var(--rows), var(--piece-size));
+      gap:1px;
+      background: #9bb7d1;
+      border-radius:6px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.15);
+      touch-action: none; /* ngăn trình duyệt xử lý cử chỉ trong vùng này */
+    }
+
+    .dropzone {
+      width: var(--piece-size);
+      height: var(--piece-size);
+      background: #fff;
+      border: 0.5px dashed #bbbb;
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden;
+    }
+
+    .dropzone.dropzone-hover { outline: 3px solid rgba(40,167,69,0.9); background:#f6fff6; }
+
+    /* --- Mảnh ghép --- */
+    .pieces {
+      margin-top:15px;
+      display:grid;
+      grid-template-columns: repeat(6, var(--piece-size));
+      grid-auto-rows: var(--piece-size);
+      gap:6px;
+      background:#fff;
+      padding:8px;
+      border-radius:8px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.1);
+      max-width: calc(var(--cols) * var(--piece-size) + 19%);
+      overflow-x: auto;     
+      scrollbar-width: none;
+    }
+    .pieces::-webkit-scrollbar {
+      display: none;            /* ẩn scrollbar trên Chrome, Edge, Safari */
+    }
+    .piece {
+      width: var(--piece-size);
+      height: var(--piece-size);
+      background-image: url('https://giadinh.mediacdn.vn/thumb_w/640/2017/photo-2-1511253800312.jpg');
+      background-size: calc(var(--cols) * var(--piece-size)) calc(var(--rows) * var(--piece-size));
+      border:1px solid rgba(0,0,0,0.08);
+      border-radius:4px;
+      cursor:grab;
+      user-select:none; touch-action:none; /* rất quan trọng: ngăn vuốt trang khi kéo */
+      box-sizing: border-box;
+      display:block;
+    }
+    .piece:active { cursor:grabbing; }
+
+    .original { text-align:center; }
+    .original p { margin-bottom:6px; font-size:14px; }
+    .original img {
+      width: calc(var(--cols) * var(--piece-size) * 0.7);
+      border-radius:6px;
+      box-shadow:0 3px 8px rgba(0,0,0,0.15);
+    }
+
+    .buttons { margin-top:15px; display:flex; gap:10px; flex-wrap:wrap; }
+    button { padding:8px 16px; font-size:14px; border:none; border-radius:6px; cursor:pointer; }
+    .check-btn { background:#28a745; color:#fff; }
+    .reset-btn { background:#ff4081; color:#fff; }
+
+    /* Khi mảnh đang kéo trên body (absolute) */
+    .dragging {
+      position:absolute; pointer-events:none; z-index:9999; transform:none !important; box-shadow:0 8px 18px rgba(0,0,0,0.25);
+    }
+
+    /* đảm bảo responsive */
+    @media (max-width:900px){ .top-area { gap:12px; } }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Nhóm 7</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="home.html">Trang chủ</a></li>
+          <li class="nav-item"><a class="nav-link" href="muasam.html">Mua sắm</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Trò chơi</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="mickey.html">🐭 Mickey học toán</a></li>
+              <li><a class="dropdown-item" href="doraemon.html">🧩 Ghép hình Doraemon</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="app-wrap">
+    <h1>🧩 Ghép hình Doraemon</h1>
+
+    <div class="top-area">
+      <div class="puzzle-board" id="board" aria-label="Khu vực ghép hình"></div>
+      <div class="original">
+        <p>📌 Hình mẫu</p>
+        <img src="https://giadinh.mediacdn.vn/thumb_w/640/2017/photo-2-1511253800312.jpg" alt="Mẫu Doraemon">
+      </div>
+    </div>
+    <div class="pieces" id="pieces" aria-live="polite"></div>
+
+    <div class="buttons">
+      <button class="check-btn" id="checkBtn">✅ Kiểm tra kết quả</button>
+      <button class="reset-btn" id="resetBtn">🔄 Chơi lại</button>
+    </div>
+  </div>
+  <script>
+    // --- Cấu hình ---
+    const cols = 4, rows = 3;
+    const rootStyles = getComputedStyle(document.documentElement);
+    const size = parseInt(rootStyles.getPropertyValue('--piece-size')) || 80;
+
+    const board = document.getElementById('board');
+    const piecesContainer = document.getElementById('pieces');
+
+    let dragging = null; // phần tử đang kéo
+    let offsetX = 0, offsetY = 0;
+
+    function initGame() {
+      board.innerHTML = '';
+      piecesContainer.innerHTML = '';
+
+      // tạo dropzones
+      for (let i = 0; i < cols * rows; i++) {
+        const dz = document.createElement('div');
+        dz.className = 'dropzone';
+        dz.dataset.index = i;
+        board.appendChild(dz);
+      }
+
+      // tạo mảnh ghép (dạng tiles từ ảnh lớn)
+      let index = 0;
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const piece = document.createElement('div');   
+          piece.className = 'piece';
+          piece.dataset.index = index++;
+          piece.style.backgroundPosition = `-${x * size}px -${y * size}px`;
+          // gán sự kiện pointer để hỗ trợ mouse + touch
+          piece.addEventListener('pointerdown', onPointerDown);
+          piecesContainer.appendChild(piece);
+        }
+      }
+
+      // xáo trộn các mảnh trong container
+      shuffleChildren(piecesContainer);
+    }
+
+    function shuffleChildren(container) {
+      const arr = Array.from(container.children);
+      arr.sort(() => Math.random() - 0.5);
+      arr.forEach(el => container.appendChild(el));
+    }
+
+    // --- Xử lý pointer (hợp nhất mouse + touch) ---
+    function onPointerDown(e) {
+      // chỉ bắt trái chuột trên desktop
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+
+      e.preventDefault();
+      const piece = e.currentTarget;
+
+      // lấy bounding box hiện tại
+      const rect = piece.getBoundingClientRect();
+      offsetX = e.clientX - rect.left;
+      offsetY = e.clientY - rect.top;
+
+      // chuẩn bị kéo: chuyển phần tử ra body để di chuyển tự do
+      piece.classList.add('dragging');
+      piece.style.width = rect.width + 'px';
+      piece.style.height = rect.height + 'px';
+      piece.style.left = rect.left + 'px';
+      piece.style.top = rect.top + 'px';
+      piece.style.position = 'absolute';
+      piece.style.pointerEvents = 'none'; // tránh nhận pointer trong lúc kéo
+      document.body.appendChild(piece);
+
+      dragging = piece;
+
+      // capture pointer để nhận pointermove/pointerup ngay cả khi ra ngoài phần tử
+      try { piece.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+
+      window.addEventListener('pointermove', onPointerMove);
+      window.addEventListener('pointerup', onPointerUp);
+    }
+
+    function onPointerMove(e) {
+      if (!dragging) return;
+      e.preventDefault();
+
+      const x = e.clientX - offsetX;
+      const y = e.clientY - offsetY;
+      dragging.style.left = x + 'px';
+      dragging.style.top = y + 'px';
+
+      // highlight dropzone hiện tại (nếu có)
+      const under = document.elementFromPoint(e.clientX, e.clientY);
+      const zone = under ? under.closest('.dropzone') : null;
+      document.querySelectorAll('.dropzone').forEach(z => z.classList.toggle('dropzone-hover', z === zone));
+    }
+
+    function onPointerUp(e) {
+      if (!dragging) return;
+      e.preventDefault();
+
+      const under = document.elementFromPoint(e.clientX, e.clientY);
+      const zone = under ? under.closest('.dropzone') : null;
+
+      if (zone) {
+        // nếu ô đã có mảnh thì chuyển mảnh đó về khay
+        if (zone.firstElementChild) {
+          resetPieceStyle(zone.firstElementChild);
+          piecesContainer.appendChild(zone.firstElementChild);
+        }
+        resetPieceStyle(dragging);
+        zone.appendChild(dragging);
+      } else {
+        // trả về khay mảnh
+        resetPieceStyle(dragging);
+        piecesContainer.appendChild(dragging);
+      }
+
+      document.querySelectorAll('.dropzone').forEach(z => z.classList.remove('dropzone-hover'));
+
+      try { dragging.releasePointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerup', onPointerUp);
+      dragging = null;
+    }
+
+    function resetPieceStyle(piece) {
+      piece.classList.remove('dragging');
+      piece.style.position = '';
+      piece.style.left = '';
+      piece.style.top = '';
+      piece.style.width = '';
+      piece.style.height = '';
+      piece.style.pointerEvents = '';
+    }
+
+    // --- Kiểm tra kết quả ---
+    function checkResult() {
+      let correct = true;
+      document.querySelectorAll('.dropzone').forEach(zone => {
+        const piece = zone.firstElementChild;
+        if (!piece || parseInt(piece.dataset.index) !== parseInt(zone.dataset.index)) {
+          correct = false;
+        }
+      });
+      if (correct) {
+        alert('🎉 Chúc mừng! Bạn đã ghép đúng Doraemon!');
+      } else {
+        alert('❌ Chưa đúng, thử lại nhé!');
+      }
+    }
+
+    // --- Reset game ---
+    function resetGame() {
+      initGame();
+    }
+
+    // gán nút
+    document.getElementById('checkBtn').addEventListener('click', checkResult);
+    document.getElementById('resetBtn').addEventListener('click', resetGame);
+
+    // khởi tạo lần đầu
+    initGame();
+  </script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mickey Học Toán 🧮</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <style>
+    :root{ --pad:10px; --cell:220px; }
+    /* --- Responsive tuning for mobile/tablet --- */
+    @media (max-width: 1200px){ :root{ --cell: 200px; } }
+    @media (max-width: 992px){  :root{ --cell: 180px; } }
+    @media (max-width: 768px){  :root{ --cell: 160px; } }
+    @media (max-width: 576px){  :root{ --cell: 140px; } }
+    body{
+      background-color: #2d5f3a;
+    }
+    .container {
+    margin: auto;
+    font-family: "Comic Sans MS", Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+    overflow: hidden;
+    }
+    h1,h4{
+    color:white;
+    }
+    .game-box {
+      position: relative;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+      top: 40px;
+      margin-left: 100px;
+    }
+    .question {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    .drop-box {
+      display: inline-block;
+      width: 70px;
+      height: 70px;
+      border: 3px dashed yellow;
+      border-radius: 10px;
+      line-height: 70px;
+      background-color: transparent;
+      color: yellow;
+      font-weight: bold;
+      font-size: 28px;
+      user-select: none;
+    }
+    .mickey {  
+    position: absolute; 
+    bottom: 0;      /* luôn đứng sát đáy */
+    left: 5%;       /* chỉnh nhẹ sang trái một chút */
+    width: 40%;
+    max-width: 400px;
+    height: auto;
+    } 
+    .answers {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 60px;
+      flex-wrap: wrap;
+    }
+    .answer {
+      background-color: white;
+      color: black;
+      padding: 15px 25px;
+      border-radius: 10px;
+      cursor: grab;
+      font-weight: bold;
+      font-size: 18px;
+      transition: transform 0.2s, background-color 0.3s;
+      user-select: none;
+      touch-action: none;
+    }
+    .answer:hover {
+      transform: scale(1.1);
+      background-color: #ffeb3b;
+    }
+    .correct {
+      background-color: lightgreen !important;
+    }
+    .wrong {
+      background-color: #ff6b6b !important;
+    }
+    #nextBtn {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background: #ffeb3b;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    #nextBtn:hover {
+      background: #fff176;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Nhóm 7</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="home.html">Trang chủ</a></li>
+          <li class="nav-item"><a class="nav-link" href="muasam.html">Mua sắm</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Trò chơi</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="mickey.html">🐭 Mickey học toán</a></li>
+              <li><a class="dropdown-item" href="doraemon.html">🧩 Ghép hình Doraemon</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+  <h1>🐭 Mickey Học Toán</h1>
+  <h4>Hãy chọn đáp án đúng cho phép toán nhé!</h4>
+  <div class="game-container">
+    <div class="box1"><img src="mickey.png" alt="Mickey" class="mickey"></div>
+    <div class="game-box">
+    <div class="question">
+      12 + 6 = <span class="drop-box" id="dropBox">?</span>
+    </div>
+    <div class="answers">
+      <div class="answer" draggable="true">17</div>
+      <div class="answer" draggable="true">18</div>
+      <div class="answer" draggable="true">19</div>
+    </div>
+    <button id="nextBtn">Câu kế tiếp ➡️</button>
+    </div>
+  </div>
+  <script>
+    const questions = [
+      { question: "21 + 15", correct: 36, answers: [71, 36, 28, 30] },
+      { question: "16x11:2", correct: 88, answers: [88, 54, 80, 77] },
+      { question: "33x98x0-11+22", correct: 11, answers: [11, 1234, 1545, 33] },
+      { question: "15+6x7:(2+1)+1", correct: 30, answers: [50, 40, 30, 25] }
+    ];
+
+    let currentQuestionIndex = 0;
+    const questionBox = document.querySelector(".question");
+    const answersContainer = document.querySelector(".answers");
+    const nextBtn = document.getElementById("nextBtn");
+
+    function loadQuestion() {
+      const q = questions[currentQuestionIndex];
+      questionBox.innerHTML = `${q.question} = <span class="drop-box" id="dropBox">?</span>`;
+      const dropBox = document.getElementById("dropBox");
+
+      answersContainer.innerHTML = "";
+      q.answers.forEach(ans => {
+        const div = document.createElement("div");
+        div.classList.add("answer");
+        div.textContent = ans;
+        div.draggable = true;
+        answersContainer.appendChild(div);
+      });
+
+      setupDragAndDrop(dropBox);
+    }
+
+    // 🧩 Hỗ trợ cả chuột và cảm ứng
+    function setupDragAndDrop(dropBox) {
+      const answers = document.querySelectorAll(".answer");
+      let draggedValue = null;
+      let draggingElem = null;
+
+      // --- CHUỘT ---
+      answers.forEach(answer => {
+        answer.addEventListener("dragstart", e => {
+          draggedValue = e.target.textContent;
+          draggingElem = e.target;
+          e.dataTransfer.effectAllowed = "move";
+          e.target.style.opacity = "0.5";
+        });
+
+        answer.addEventListener("dragend", e => {
+          e.target.style.opacity = "1";
+        });
+      });
+
+      dropBox.addEventListener("dragover", e => e.preventDefault());
+      dropBox.addEventListener("drop", e => {
+        e.preventDefault();
+        handleDrop(dropBox, draggedValue);
+      });
+
+      // --- CẢM ỨNG ---
+      answers.forEach(answer => {
+        answer.addEventListener("touchstart", e => {
+          draggingElem = e.target;
+          draggedValue = e.target.textContent;
+          e.target.style.transform = "scale(1.1)";
+        });
+
+        answer.addEventListener("touchmove", e => {
+          const touch = e.touches[0];
+          draggingElem.style.position = "fixed";
+          draggingElem.style.left = touch.clientX - 40 + "px";
+          draggingElem.style.top = touch.clientY - 25 + "px";
+          draggingElem.style.zIndex = 1000;
+        });
+
+        answer.addEventListener("touchend", e => {
+          e.target.style.transform = "scale(1)";
+          e.target.style.position = "";
+          e.target.style.left = "";
+          e.target.style.top = "";
+          e.target.style.zIndex = "";
+
+          const touch = e.changedTouches[0];
+          const rect = dropBox.getBoundingClientRect();
+          if (
+            touch.clientX >= rect.left &&
+            touch.clientX <= rect.right &&
+            touch.clientY >= rect.top &&
+            touch.clientY <= rect.bottom
+          ) {
+            handleDrop(dropBox, draggedValue);
+          }
+        });
+      });
+    }
+
+    function handleDrop(dropBox, value) {
+      dropBox.textContent = value;
+      const correct = questions[currentQuestionIndex].correct;
+      if (parseInt(value) === correct) {
+        dropBox.classList.add("correct");
+        setTimeout(() => alert("🎉 Chính xác!"), 200);
+      } else {
+        dropBox.classList.add("wrong");
+        setTimeout(() => alert("❌ Sai mất rồi!"), 200);
+      }
+      setTimeout(() => {
+        dropBox.classList.remove("correct", "wrong");
+        dropBox.textContent = "?";
+      }, 1500);
+    }
+
+    nextBtn.addEventListener("click", () => {
+      currentQuestionIndex++;
+      if (currentQuestionIndex >= questions.length) {
+        alert("🎉 Bạn đã hoàn thành tất cả câu hỏi!");
+        currentQuestionIndex = 0;
+      }
+      loadQuestion();
+    });
+
+    loadQuestion();
+  </script>
+</body>
+</html>

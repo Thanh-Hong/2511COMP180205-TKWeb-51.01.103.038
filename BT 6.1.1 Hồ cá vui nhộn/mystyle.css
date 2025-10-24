@@ -1,0 +1,221 @@
+#shark{
+    left: 5vw;
+    top: 68vh;
+    position: absolute;
+    animation-name: shark;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    transform-origin: center center;
+
+}
+@keyframes shark{
+    0% {left: 5vw; top: 68vh;}
+    10% {left: 15vw; top: 68vh;}
+    20% {left: 30vw; top: 58vh;}
+    40% {left: 65vw; top: 55vh;}
+    50% {left: 70vw; top: 20vh;transform: rotateY(0deg);}
+    60% {left: 70vw; top: 55vh;transform: rotateY(-180deg);}
+    80% {left: 30vw; top: 58vh;transform: rotateY(-180deg);}
+    90% {left: 25vw; top: 68vh;transform: rotateY(-180deg);}
+    100% {left: 5vw; top: 68vh; transform: rotateY(0deg);}
+}
+#turtle{
+    left: 0vw;
+    top: 38vh;
+    position: absolute;
+    animation-name: turtle;
+    animation-duration: 30s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    transform-origin: center center;
+}
+@keyframes turtle{
+    0% {left: 0vw; top: 38vh;}
+    10% {left: 20vw; top: 38vh;}
+    20% {left: 40vw; top: 49vh;}
+    40% {left: 80vw; top: 60vh;}
+    50% {left: 85vw; top: 75vh; transform: rotateY(0deg);}  /* dừng lại 1 chút */
+    55% {left: 83vw; top: 75vh; transform: rotateY(-180deg); } /* xoay xong */
+    60% {left: 80vw; top: 60vh;transform: rotateY(-180deg);}
+    80% {left: 40vw; top: 49vh;transform: rotateY(-180deg);}
+    90% {left: 20vw; top: 38vh;transform: rotateY(-180deg);}
+    100% {left: 0vw; top: 38vh;transform: rotateY(0deg);}
+}
+#diver1{
+    right: 25vw;
+    top: 5vh;
+    position: absolute;
+    animation-name: diver1;
+    animation-duration: 25s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    transform-origin: center center;
+
+}
+@keyframes diver1{
+    0% {right: 25vw; top: 5vh; transform: rotateY(-180deg);}
+    25% {right: 60vw; top: 40vh;transform: rotateY(-180deg);}
+    40% {right: 75vw; top: 60vh;transform: rotateY(-180deg);}
+    50% {right: 80vw; top: 70vh;transform: rotateY(0deg);}
+    55% {right: 77vw; top: 65vh;}
+    75% {right: 60vw; top: 40vh;}
+    100% {right: 25vw; top: 5vh;transform: rotateY(0deg);}
+}
+#diver2{
+    left: 81vw;
+    top: 50vh;
+    position: absolute;
+    animation-name: diver2;
+    animation-duration: 19s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}    
+@keyframes diver2{
+    0% {left: 81vw; top: 50vh; transform: rotateY(-180deg);}
+    20% {left: 60vw; top: 32vh; transform: rotateY(-180deg);}
+    40% {left: 30vw; top: 29vh; transform: rotateY(-180deg);}
+    50% {left: 17vw; top: 26vh; transform: rotateY(0deg);}
+    60% {left: 28vw; top: 28vh;}
+    80% {left: 60vw; top: 32vh;}
+    100% {left: 81vw; top: 50vh; transform: rotateY(0deg);}
+}
+#diver3{
+    left: 40vw;
+    top: 3vh;
+    position: absolute;
+    animation-name: diver3;
+    animation-duration: 22.4s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}
+@keyframes diver3{
+    0% {left: 40vw; top: 3vh;}
+    10% {left:50vw; top:3vh;}
+    20% {left: 60vw; top: 15vh;}
+    40% {left: 80vw; top: 23vh;}
+    50% {left: 80vw; top: 28vh; transform: rotateY(0deg);}
+    60% {left: 80vw; top: 25vh;transform: rotateY(-180deg);}
+    80% {left: 60vw; top: 15vh; transform: rotateY(-180deg);}
+    100% {left: 40vw ; top: 3vh; transform: rotateY(0deg);}
+}
+body {
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    background-image: url('https://cf-img-a-in.tosshub.com/sites/visualstory/wp/2024/09/under-water-mountain-2-1.jpeg?size=*:900');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+#goldFishSchool{
+    left: 0vw;
+    top: 15vh;
+    position: absolute;
+    animation-name: goldFishSchool;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}
+@keyframes goldFishSchool{
+    0% {left: 0vw; top: 15vh;}
+    10% {left:20vw; top:15vh;}
+    20% {left: 50vw; top: 15vh;}
+    40% {left: 80vw; top: 15vh;}
+    50% {left: 90vw; top: 15vh; transform: rotateY(0deg);}
+    60% {left: 80vw; top: 15vh;transform: rotateY(-180deg);}
+    80% {left: 50vw; top: 15vh; transform: rotateY(-180deg);}
+    100% {left: 0vw ; top: 15vh; transform: rotateY(0deg);}
+}
+#goldFishSchool2{
+    left: 0vw;
+    top: 55vh;
+    position: absolute;
+    animation-name: goldFishSchool2;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}
+@keyframes goldFishSchool2{
+    0% {left: 0vw; top: 55vh;}
+    10% {left:20vw; top: 55vh;}
+    20% {left: 50vw; top: 55vh;}
+    40% {left: 80vw; top: 55vh;}
+    50% {left: 90vw; top: 55vh; transform: rotateY(0deg);}
+    60% {left: 80vw; top: 55vh;transform: rotateY(-180deg);}
+    80% {left: 50vw; top: 55vh; transform: rotateY(-180deg);}
+    100% {left: 0vw ; top: 55vh; transform: rotateY(0deg);}
+}
+#goldFishSchool3{
+    right: 0vw;
+    top: 85vh;
+    position: absolute;
+    animation-name: goldFishSchool3;
+    animation-duration: 12s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}
+@keyframes goldFishSchool3{
+    0% {right: 0vw; top:85vh;transform: rotateY(-180deg);}
+    40% {right: 80vw; top:85vh; transform: rotateY(-180deg);}
+    50% {right: 90vw; top: 85vh; transform: rotateY(0deg);}
+    60% {right: 80vw; top: 85vh;}
+    100% {right: 0vw; top: 85vh; transform: rotateY(0deg);}
+}
+
+#faintSchool{
+    left: 40vw;
+    top: 85vh;
+    position: absolute;
+    animation-name: faintSchool;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}
+@keyframes faintSchool{
+    0% {left: 40vw; top: 85vh;}
+    50% {left: 40vw; top: 55vh; }
+    100% {left: 40vw ; top: 0vh;}
+}
+#faintSchool2{
+    left: 67vw;
+    top: 85vh;
+    position: absolute;
+    animation-name: faintSchool2;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}
+@keyframes faintSchool2{
+    0% {left: 67vw; top: 85vh;}
+    50% {left: 67vw; top: 55vh; }
+    100% {left: 67vw ; top: 0vh;}
+}
+#faintSchool3{
+    left: 5vw;
+    top: 85vh;
+    position: absolute;
+    animation-name: faintSchool3;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}
+@keyframes faintSchool3{
+    0% {left: 5vw; top: 85vh;}
+    50% {left: 5vw; top: 55vh; }
+    100% {left: 5vw ; top: 0vh;}
+}
+

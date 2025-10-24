@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng ký tham gia lễ hội Halloween 2025</title>
+  <link rel="stylesheet" href="HL1.css">
+</head>
+<body class="history__body">
+<!--==================== HEADER ====================-->
+      <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav__logo">
+            Halloween
+            </a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="HALLOWEEN.html" class="nav__link">Home</a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="LS_halloween.html" class="nav__link">Lịch sử</a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="gianhang.html" class="nav__link">Gian hàng</a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="suutam.html" class="nav__link">Bộ sưu tầm</a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="ContactHL.html" class="nav__link">Liên hệ</a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="dangky.html" class="nav__link">Đăng ký</a>
+                    </li>
+                </ul>
+
+                <!-- Close button -->
+                <div class="nav__close" id="nav-close">
+                    <i class="ri-close-line"></i>
+                </div>
+            </div>
+
+                <!-- Toggle button -->
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="ri-apps-2-line"></i>
+                </div>
+            </nav>
+      </header>
+
+
+  <header class="lienhe_header">
+    <h1 class="lienhe_title">Form tham gia</h1>
+    <p class="lienhe_intro">Đêm hội mặt nạ, hóa trang và trò chơi rùng rợn — hãy đăng ký ngay!</p>
+  </header>
+
+  <main class="dangky_container">
+    <!-- Thông tin lễ hội -->
+    <section class="dangky_info">
+      <h2>Thông tin lễ hội</h2>
+      <ul>
+        <li><strong>Thời gian:</strong> 31/10/2025</li>
+        <li><strong>Địa điểm:</strong> Sân vận động X</li>
+        <li><strong>Mở cửa:</strong> 18:00</li>
+      </ul>
+      <p>
+        Hóa trang thành nhân vật yêu thích, tham gia trò chơi và nhận quà bất ngờ!
+      </p>
+      <!-- <div class="dangky_tags">
+        <span>Âm nhạc sống</span>
+        <span>Giải trang phục</span>
+        <span>Quà tặng</span>
+      </div> -->
+    </section>
+
+    <!-- Form đăng ký -->
+    <section class="dangky_form_card">
+      <h2>Form đăng ký tham gia</h2>
+      <form id="registerForm" class="dangky_form">
+        <div class="dangky_row">
+          <div>
+            <label>Họ và tên</label>
+            <input id="fullname" name="fullname" type="text" placeholder="Nguyễn Văn A" required />
+          </div>
+          <div>
+            <label>Tuổi</label>
+            <input id="age" name="age" type="number" min="6" max="80" placeholder="18" />
+
+          </div>
+        </div>
+
+        <label>Email</label>
+        <input id="email" name="email" type="email" placeholder="email@example.com" required />
+
+        <label>Số điện thoại</label>
+        <input type="tel" placeholder="0987654321" required>
+
+        <label>Ý tưởng trang phục / nhóm</label>
+        <input type="text" placeholder="Ví dụ: Ma cà rồng — Nhóm 4 người">
+
+        <div class="dangky_row">
+          <div>
+            <label>Số khách đi cùng</label>
+            <select>
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+          </div>
+          <div>
+            <label>Ca tham gia</label>
+            <select>
+              <option>18:00 - 20:00</option>
+              <option>20:00 - 22:00</option>
+            </select>
+          </div>
+        </div>
+
+        <label>Ghi chú</label>
+        <textarea placeholder="Ví dụ: bị dị ứng với khói..."></textarea>
+
+        <div class="dangky_checkbox">
+          <input type="checkbox" required>
+          <span>Tôi đồng ý với <a href="#">quy định an toàn</a> của ban tổ chức.</span>
+        </div>
+
+        <div class="dangky_buttons">
+          <button type="submit" class="dangky_submit">Đăng ký</button>
+          <button type="reset" class="dangky_reset">Làm lại</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>© 2025 Lễ hội Halloween</footer>
+
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Bạn đã đăng ký thành công! Hẹn gặp lại tại lễ hội Halloween 2025!");
+    });
+  </script>
+</body>
+</html>

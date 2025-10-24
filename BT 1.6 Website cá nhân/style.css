@@ -1,0 +1,168 @@
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #f4f8ff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* chiều cao tối thiểu bằng màn hình */
+}
+
+main {
+    flex: 1; /* chiếm không gian còn lại, đẩy footer xuống dưới */
+}
+
+.h1{
+    text-align:center;
+    color:#F00; font-family:Arial;
+}
+.menu {
+    width: 100%; 
+    height:50px;
+    margin:auto;
+    background-color: #3b82f6;
+}
+.menu ul {
+    padding:0; margin:0;
+    list-style: none;
+    float: left;
+}
+.menu ul li {
+    float:left;
+    position: relative;
+    }
+.menu ul li a {
+    text-decoration:none;
+    padding:0 20px;
+    font-family:Arial;
+    color: #f0f9ff;
+    font-size: 14px;
+    line-height:50px;
+    display:block;
+}
+.menu ul li a:hover {
+    background-color:#333;
+    color:#FFF;
+    line-height:48px;
+    border-bottom:2px solid #F00;
+}
+
+footer {
+    background-color: #1d4ed8;
+    color: white;
+    text-align: center;
+    bottom: 0px;
+    padding: 15px 20px;
+    font-size: 15px;
+    line-height: 1.6;
+    width: 100%
+}
+
+/* Tiêu đề chính */
+.title {
+    text-align: center;
+    margin: 40px auto;
+    max-width: 800px;
+}
+
+.title h1 {
+    color: #0f2f91;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.title p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Giới thiệu */
+.intro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin: 20px auto;
+    max-width: 1000px;
+}
+
+.text-box {
+    /* background: white; */
+    padding: 0px;
+    /* border: 2px solid #1d4ed8; */
+    border-radius: 10px;
+    width: 30vw;
+    /* box-shadow: 0 2px 6px rgba(0,0,0,0.1); */
+}
+
+.text-box h2 {
+    color: #1d4ed8;
+}
+
+.image-box {
+    text-align: center;
+}
+
+.image-box img {
+    width: 300px;
+    border-radius: 8px;
+    border: 2px solid #d1d5db;
+}
+
+/* .caption {
+    font-size: 13px;
+    color: #555;
+    margin-top: 5px;
+} */
+
+/* Phần thảo luận */
+/* .discussion {
+    background-color: #e8f0ff;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.discussion h2 {
+    color: #1d4ed8;
+    font-size: 22px;
+} */
+
+
+/* .graph {
+    width: 80%;
+    height: 100px;
+    margin: 30px auto 0;
+    background: linear-gradient(to right, #60a5fa, #3b82f6, #1e40af);
+    border-radius: 50px;
+    clip-path: polygon(0 100%, 15% 40%, 30% 80%, 50% 30%, 70% 60%, 85% 20%, 100% 70%, 100% 100%);
+} */
+
+/* Nguồn */
+/* .source {
+    background-color: #1e3a8a;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+} */
+.experience {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-left: 4px solid #1E90FF;
+    border-radius: 8px;
+    background-color: white;
+}
+.experience h2{
+    color: #1d4ed8;
+}
+
+.experience2 {
+    display: inline-block;
+    padding: 15px;
+    border-left: 4px solid #1E90FF;
+    border-radius: 8px;
+    background-color: white;
+}

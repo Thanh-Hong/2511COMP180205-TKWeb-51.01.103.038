@@ -90,12 +90,9 @@ footer {
 }
 
 .text-box {
-    /* background: white; */
     padding: 0px;
-    /* border: 2px solid #1d4ed8; */
     border-radius: 10px;
     width: 30vw;
-    /* box-shadow: 0 2px 6px rgba(0,0,0,0.1); */
 }
 
 .text-box h2 {
@@ -111,43 +108,6 @@ footer {
     border-radius: 8px;
     border: 2px solid #d1d5db;
 }
-
-/* .caption {
-    font-size: 13px;
-    color: #555;
-    margin-top: 5px;
-} */
-
-/* Phần thảo luận */
-/* .discussion {
-    background-color: #e8f0ff;
-    padding: 40px 20px;
-    text-align: center;
-}
-
-.discussion h2 {
-    color: #1d4ed8;
-    font-size: 22px;
-} */
-
-
-/* .graph {
-    width: 80%;
-    height: 100px;
-    margin: 30px auto 0;
-    background: linear-gradient(to right, #60a5fa, #3b82f6, #1e40af);
-    border-radius: 50px;
-    clip-path: polygon(0 100%, 15% 40%, 30% 80%, 50% 30%, 70% 60%, 85% 20%, 100% 70%, 100% 100%);
-} */
-
-/* Nguồn */
-/* .source {
-    background-color: #1e3a8a;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    font-size: 14px;
-} */
 .experience {
     margin-bottom: 20px;
     padding: 15px;
@@ -166,3 +126,4 @@ footer {
     border-radius: 8px;
     background-color: white;
 }
+
